@@ -1,10 +1,134 @@
 @import "tailwindcss";
 
+/* ============================================================
+   NOTE: Google Fonts are loaded via <link> in layout.tsx
+   ============================================================ */
+
+/* ============================================================
+   CSS DESIGN TOKENS
+   ============================================================ */
+:root {
+  /* Colors */
+  --cream:          #FAFAF7;
+  --cream-mid:      #F0EEE9;
+  --cream-border:   #E8E4DC;
+  --charcoal:       #0E0E0E;
+  --charcoal-soft:  #1A1A1A;
+  --charcoal-mid:   #2C2C2C;
+  --charcoal-muted: #6B6B6B;
+  --gray-light:     #F5F5F2;
+  --gray-mid:       #D6D3CC;
+  --orange:         #E8703A;
+  --orange-hover:   #D4602C;
+  --orange-light:   #FFF0E8;
+  --white:          #FFFFFF;
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spacing scale */
+  --space-xs:   4px;
+  --space-sm:   8px;
+  --space-md:   16px;
+  --space-lg:   24px;
+  --space-xl:   40px;
+  --space-2xl:  64px;
+  --space-3xl:  96px;
+  --space-4xl:  128px;
+
+  /* Border radius */
+  --radius-sm:  8px;
+  --radius-md:  16px;
+  --radius-lg:  24px;
+  --radius-xl:  32px;
+  --radius-2xl: 48px;
+  --radius-pill: 9999px;
+
+  /* Shadows */
+  --shadow-xs:  0 1px 2px 0 rgba(0,0,0,0.05);
+  --shadow-sm:  0 2px 8px 0 rgba(0,0,0,0.06);
+  --shadow-md:  0 4px 20px 0 rgba(0,0,0,0.08);
+  --shadow-lg:  0 12px 40px 0 rgba(0,0,0,0.12);
+  --shadow-xl:  0 24px 64px 0 rgba(0,0,0,0.16);
+}
+
+/* ============================================================
+   BASE RESET
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
+  -webkit-text-size-adjust: 100%;
 }
 
+body {
+  font-family: var(--font-body);
+  background-color: var(--cream);
+  color: var(--charcoal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   TYPOGRAPHY SYSTEM
+   ============================================================ */
+.font-display { font-family: var(--font-display); }
+.font-body    { font-family: var(--font-body); }
+
+/* Editorial Headline Classes */
+.editorial-hero {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 7vw, 100px);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--charcoal);
+}
+
+.editorial-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--charcoal);
+}
+
+.editorial-h3 {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 40px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--charcoal);
+}
+
+.section-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+.body-lead {
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--charcoal-muted);
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
@@ -15,23 +139,36 @@ html {
   to   { opacity: 1; transform: scale(1)   translateY(0); }
 }
 
-.animate-fadeIn  { animation: fadeIn  0.2s ease forwards; }
-.animate-scaleUp { animation: scaleUp 0.25s cubic-bezier(0.34,1.56,0.64,1) forwards; }
-
-.marquee {
-    animation: scroll-left 10s linear infinite;
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes scroll-left {
-    0% {
-        transform: translateX(0%);
-    }
-
-    100% {
-        transform: translateX(-50%);
-    }
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
 }
 
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+.animate-fadeIn  { animation: fadeIn  0.2s ease forwards; }
+.animate-scaleUp { animation: scaleUp 0.25s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+.animate-fadeUp  { animation: fadeUp  0.5s ease forwards; }
+.animate-float   { animation: float   4s ease-in-out infinite; }
+
+/* ============================================================
+   MARQUEE
+   ============================================================ */
+.marquee {
+  animation: scroll-left 18s linear infinite;
+}
+
+/* ============================================================
+   SWIPER OVERRIDES
+   ============================================================ */
 .swiper-pagination-bullets {
   bottom: 0px !important;
   display: flex !important;
@@ -40,37 +177,58 @@ html {
 }
 
 .swiper-pagination-bullet {
-  width: 15px !important;
-  height: 15px !important;
-  background: #d1d5db !important;
+  width: 8px !important;
+  height: 8px !important;
+  background: var(--cream-border) !important;
   opacity: 1 !important;
   border-radius: 50% !important;
   transition: all 0.3s ease-in-out !important;
 }
 
 .swiper-pagination-bullet-active {
-  background: #fd853a !important;
-  width: 60px !important;
-  height: 15px !important;
-  border-radius: 21px !important;
+  background: var(--orange) !important;
+  width: 32px !important;
+  height: 8px !important;
+  border-radius: var(--radius-pill) !important;
   transition: all 0.3s ease-in-out !important;
 }
 
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--cream-mid); }
+::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--orange-hover); }
 
-::-webkit-scrollbar {
-  width: 8px;
+/* ============================================================
+   UTILITY OVERRIDES
+   ============================================================ */
+.section-pad {
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 4px;
+.orange-accent { color: var(--orange); }
+.pill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--orange);
+  color: var(--orange);
+  background: var(--orange-light);
 }
 
-::-webkit-scrollbar-thumb {
-  background: #FD853A;
-  border-radius: 4px;
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-::-webkit-scrollbar-thumb:hover {
-  background: #e4752f;
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
 }

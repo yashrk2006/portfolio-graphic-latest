@@ -1,33 +1,94 @@
-import Image from 'next/image';
-
 interface HoverCardProps {
   title: string;
-  imageSrc: string;
+  imageSrc?: string;
   priority?: boolean;
 }
 
-export default function ServicesCard({ title, imageSrc, priority = false }: HoverCardProps) {
+export default function ServicesCard({ title }: HoverCardProps) {
+  // Map titles to icons and descriptions
+  const cardConfig: Record<string, { emoji: string; desc: string; bullets: string[] }> = {
+    "Graphic Design & Thumbnails": {
+      emoji: "✦",
+      desc: "Scroll-stopping visuals built for engagement.",
+      bullets: ["Social media posts & stories", "YouTube thumbnails", "Promotional creatives"],
+    },
+    "CapCut Reels & Shorts Editing": {
+      emoji: "▶",
+      desc: "High-retention vertical video that hooks instantly.",
+      bullets: ["Reels & YouTube Shorts", "Captions & transitions", "Sound FX & pacing"],
+    },
+    "AI Content & Visual Concepts": {
+      emoji: "◈",
+      desc: "Generative AI art meets professional finishing.",
+      bullets: ["Prompt engineering", "Midjourney & AI art", "Matte painting & compositing"],
+    },
+    "Social Media & Brand Identity": {
+      emoji: "◉",
+      desc: "Cohesive brand presence across every platform.",
+      bullets: ["Logo & identity design", "Brand color systems", "Platform-specific formats"],
+    },
+    "Marketing, SEO & Content": {
+      emoji: "◇",
+      desc: "Content strategy that drives visibility and growth.",
+      bullets: ["Content calendars", "SEO-optimized copy", "Campaign ideation"],
+    },
+    "Pitch Decks & Creative Demos": {
+      emoji: "◫",
+      desc: "Visual presentations that win rooms and pitches.",
+      bullets: ["Hackathon pitch decks", "Demo slide design", "Infographic data viz"],
+    },
+  };
+
+  const config = cardConfig[title] || { emoji: "✦", desc: "", bullets: [] };
+
   return (
-    <div className="relative flex flex-col items-center justify-end w-full md:max-w-[360px] lg:max-w-[416px] h-[450px] lg:h-[508px] rounded-[37px] lg:rounded-[40px] bg-white/10 backdrop-blur-[15px] border border-white/50 hover:bg-[#FD853A] transition-colors duration-300 ease-in-out overflow-hidden cursor-pointer group">
-      
-      {/* Title (absolute top) */}
-      <h1 className="absolute top-4 w-full h-[40px] sm:h-[45px] md:h-[50px] lg:h-[65px] flex items-start font-medium text-[20px] md:text-[24px] lg:text-[32px] text-white z-30 border-b-2 border-[#F9FAFB]/30">
-        <span className="relative lg:top-2 left-6">{title}</span>
-      </h1>
+    <div
+      className="group relative flex flex-col w-full md:max-w-[360px] lg:max-w-[400px] h-auto min-h-[280px] p-8 rounded-3xl cursor-pointer transition-all duration-400 overflow-hidden"
+      style={{
+        backgroundColor: '#1A1A1A',
+        border: '1px solid #2C2C2C',
+      }}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLDivElement).style.borderColor = '#E8703A';
+        (e.currentTarget as HTMLDivElement).style.backgroundColor = '#E8703A';
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLDivElement).style.borderColor = '#2C2C2C';
+        (e.currentTarget as HTMLDivElement).style.backgroundColor = '#1A1A1A';
+      }}
+    >
+      {/* Emoji icon */}
+      <div
+        className="w-12 h-12 rounded-2xl flex items-center justify-center mb-6 text-lg font-bold transition-all duration-300 group-hover:scale-110"
+        style={{ backgroundColor: '#2C2C2C', color: '#E8703A' }}
+      >
+        <span>{config.emoji}</span>
+      </div>
 
-      {/* Decorative Backgrounds */}
-      <div className="absolute w-[80%]  lg:w-[310px] h-[330px]  lg:h-[329px] rounded-[25px] lg:rounded-[35px] bg-[#757575] opacity-50 mb-2 sm:mb-3 md:mb-4 lg:mb-5"></div>
-      <div className="absolute w-[90%]  lg:w-[364px] h-[320px]  lg:h-[329px] rounded-[25px] lg:rounded-[35px]  bg-[#9E9D9D]"></div>
+      {/* Title */}
+      <h3
+        className="text-[#FAFAF7] font-semibold text-xl mb-2 leading-snug transition-colors duration-200 group-hover:text-white"
+        style={{ fontFamily: "'Playfair Display', serif" }}
+      >
+        {title}
+      </h3>
 
-      {/* Image */}
-      <Image
-        src={imageSrc}
-        alt="Card Image"
-        width={416}
-        height={307}
-        className="object-cover z-20 w-full h-[300px] md:max-h-[360px] lg:max-h-[416px] rounded-[35px]"
-        priority={priority}
-      />
+      {/* Description */}
+      <p className="text-sm leading-relaxed mb-4 transition-colors duration-200"
+        style={{ color: '#6B6B6B', fontFamily: "'Inter', sans-serif" }}
+      >
+        {config.desc}
+      </p>
+
+      {/* Bullets */}
+      <ul className="flex flex-col gap-1.5 mt-auto">
+        {config.bullets.map((b, i) => (
+          <li key={i} className="flex items-center gap-2 text-xs" style={{ color: '#D6D3CC', fontFamily: "'Inter', sans-serif" }}>
+            <span className="w-1 h-1 rounded-full shrink-0" style={{ backgroundColor: '#E8703A' }} />
+            {b}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

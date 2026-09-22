@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Sparkles, Maximize2, X, ChevronLeft, ChevronRight, CheckCircle2, Wrench, Layers } from 'lucide-react';
+import { Maximize2, X, ChevronLeft, ChevronRight, CheckCircle2, Wrench, Layers } from 'lucide-react';
 import { designShowcaseData, DesignItem } from '@/data/data';
 
 const categories = [
@@ -10,7 +10,8 @@ const categories = [
   'Branding & Web',
   'Social Media',
   'AI & Tech',
-  'Posters & Artwork'
+  'Posters & Artwork',
+  'Video & Editing',
 ];
 
 export default function DesignShowcase() {
@@ -28,9 +29,7 @@ export default function DesignShowcase() {
     setActiveModalItem(item);
   };
 
-  const closeModal = () => {
-    setActiveModalItem(null);
-  };
+  const closeModal = () => setActiveModalItem(null);
 
   const nextModalItem = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -61,41 +60,58 @@ export default function DesignShowcase() {
         setActiveModalItem(designShowcaseData[prevIdx]);
       }
     };
-
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [activeModalItem, activeItemIndex]);
 
   return (
-    <section id="designs" className="w-full py-16 px-4 sm:px-6 lg:px-[71px] bg-[#0E1015] text-white rounded-[32px] sm:rounded-[50px] my-12 overflow-hidden border border-[#232733] shadow-2xl relative">
-      {/* Glow Ambient Highlights */}
-      <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#FD853A]/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#3B82F6]/15 rounded-full blur-3xl pointer-events-none" />
+    <section
+      id="designs"
+      className="w-full py-20 px-4 sm:px-6 lg:px-[72px] my-12 overflow-hidden relative rounded-[32px] sm:rounded-[48px]"
+      style={{ backgroundColor: '#0E0E0E', border: '1px solid #1A1A1A' }}
+    >
+      {/* Subtle ambient glow */}
+      <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full blur-3xl pointer-events-none opacity-20"
+        style={{ background: 'radial-gradient(circle, #E8703A 0%, transparent 70%)' }} />
+      <div className="absolute -bottom-40 -right-40 w-96 h-96 rounded-full blur-3xl pointer-events-none opacity-10"
+        style={{ background: 'radial-gradient(circle, #6B6B6B 0%, transparent 70%)' }} />
 
-      {/* Header Section */}
-      <div className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto mb-12">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FD853A]/10 border border-[#FD853A]/30 text-[#FD853A] text-sm font-semibold mb-4 backdrop-blur-md">
-          <Sparkles size={16} />
-          <span>Featured Design Portfolio</span>
-        </div>
-        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
-          Creative <span className="text-[#FD853A]">Designs</span> & Visual Stories
+      {/* Header */}
+      <div className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto mb-14">
+        <span className="pill-tag mb-5">
+          Featured Design Portfolio
+        </span>
+        <h2
+          className="text-[#FAFAF7] mb-4"
+          style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: 'clamp(36px, 5vw, 72px)',
+            fontWeight: 700,
+            lineHeight: 1.08,
+            letterSpacing: '-0.015em',
+          }}
+        >
+          Creative Designs &amp;{' '}
+          <em style={{ color: '#E8703A', fontStyle: 'italic' }}>Visual Stories</em>
         </h2>
-        <p className="text-gray-400 text-base sm:text-lg lg:text-xl max-w-2xl leading-relaxed">
-          From brand identity showcase and high-converting social media creatives to futuristic AI posters and dark fantasy artwork.
+        <p className="text-[#6B6B6B] text-base sm:text-lg max-w-2xl leading-relaxed"
+          style={{ fontFamily: "'Inter', sans-serif" }}>
+          From brand identity and high-converting social media creatives to AI posters and dark fantasy artwork.
         </p>
 
         {/* Category Filters */}
-        <div className="flex flex-wrap justify-center gap-2.5 sm:gap-3 mt-8">
+        <div className="flex flex-wrap justify-center gap-2 mt-8">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-5 py-2.5 rounded-full text-sm sm:text-base font-medium transition-all duration-300 cursor-pointer ${
-                selectedCategory === cat
-                  ? 'bg-[#FD853A] text-white shadow-lg shadow-[#FD853A]/30 scale-105 font-semibold'
-                  : 'bg-[#181B24] text-gray-300 border border-[#2A2E3D] hover:bg-[#232734] hover:text-white'
-              }`}
+              className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-250 cursor-pointer"
+              style={{
+                backgroundColor: selectedCategory === cat ? '#E8703A' : '#1A1A1A',
+                color: selectedCategory === cat ? '#FFFFFF' : '#6B6B6B',
+                border: `1px solid ${selectedCategory === cat ? '#E8703A' : '#2C2C2C'}`,
+                fontFamily: "'Inter', sans-serif",
+              }}
             >
               {cat}
             </button>
@@ -104,113 +120,137 @@ export default function DesignShowcase() {
       </div>
 
       {/* Design Grid */}
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-[1300px] mx-auto">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-[1300px] mx-auto">
         {filteredItems.map((item) => (
           <div
             key={item.id}
             onClick={() => openModal(item)}
-            className="group relative bg-[#151821] border border-[#232735] rounded-3xl overflow-hidden cursor-pointer flex flex-col transition-all duration-500 hover:-translate-y-2 hover:border-[#FD853A]/50 hover:shadow-2xl hover:shadow-[#FD853A]/10"
+            className="group relative rounded-2xl overflow-hidden cursor-pointer flex flex-col transition-all duration-400 hover:-translate-y-1"
+            style={{
+              backgroundColor: '#141414',
+              border: '1px solid #2C2C2C',
+            }}
+            onMouseEnter={(e) => ((e.currentTarget as HTMLDivElement).style.borderColor = '#E8703A50')}
+            onMouseLeave={(e) => ((e.currentTarget as HTMLDivElement).style.borderColor = '#2C2C2C')}
           >
-            {/* Image Container */}
-            <div className="relative w-full aspect-[16/10] overflow-hidden bg-[#0A0B0E]">
+            {/* Image */}
+            <div className="relative w-full aspect-[16/10] overflow-hidden" style={{ backgroundColor: '#0A0A0A' }}>
               <Image
                 src={item.image}
                 alt={item.title}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-110"
+                className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
               />
-              {/* Dark Overlay gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#151821] via-transparent to-black/30 opacity-75 group-hover:opacity-40 transition-opacity duration-300" />
-              
-              {/* Category Tag */}
-              <div className="absolute top-4 left-4 z-10 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-xs font-semibold text-white">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-black/20 opacity-70 group-hover:opacity-40 transition-opacity duration-300" />
+
+              {/* Category tag */}
+              <div
+                className="absolute top-3 left-3 z-10 px-3 py-1 rounded-full text-xs font-semibold"
+                style={{ backgroundColor: 'rgba(0,0,0,0.65)', backdropFilter: 'blur(8px)', color: '#FAFAF7', border: '1px solid rgba(255,255,255,0.08)' }}
+              >
                 {item.tag}
               </div>
 
-              {/* Quick View Button on Hover */}
-              <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40 backdrop-blur-[2px]">
-                <div className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#FD853A] text-white font-bold text-sm shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                  <Maximize2 size={16} />
+              {/* Quick view hover */}
+              <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundColor: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(2px)' }}>
+                <div className="flex items-center gap-2 px-5 py-2.5 rounded-full text-white font-semibold text-sm shadow-xl transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300"
+                  style={{ backgroundColor: '#E8703A' }}>
+                  <Maximize2 size={15} />
                   <span>Inspect Design</span>
                 </div>
               </div>
             </div>
 
-            {/* Card Content */}
-            <div className="p-6 flex flex-col justify-between flex-1">
+            {/* Card content */}
+            <div className="p-5 flex flex-col justify-between flex-1">
               <div>
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#FD853A] transition-colors duration-300 line-clamp-1">
+                <h3
+                  className="text-lg font-semibold mb-1.5 line-clamp-1 transition-colors duration-200 group-hover:text-[#E8703A]"
+                  style={{ color: '#FAFAF7', fontFamily: "'Playfair Display', serif" }}
+                >
                   {item.title}
                 </h3>
-                <p className="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-2">
+                <p className="text-sm leading-relaxed mb-4 line-clamp-2" style={{ color: '#6B6B6B', fontFamily: "'Inter', sans-serif" }}>
                   {item.description}
                 </p>
               </div>
 
-              {/* Tools Badges */}
-              <div className="pt-4 border-t border-[#232735] flex items-center justify-between">
+              {/* Tools */}
+              <div className="pt-4 flex items-center justify-between" style={{ borderTop: '1px solid #2C2C2C' }}>
                 <div className="flex flex-wrap gap-1.5">
                   {item.tools.slice(0, 3).map((tool, i) => (
                     <span
                       key={i}
-                      className="px-2.5 py-1 rounded-md bg-[#1E2230] text-gray-300 text-xs font-medium border border-[#2B3043]"
+                      className="px-2.5 py-1 rounded-lg text-xs font-medium"
+                      style={{ backgroundColor: '#1A1A1A', color: '#D6D3CC', border: '1px solid #2C2C2C', fontFamily: "'Inter', sans-serif" }}
                     >
                       {tool}
                     </span>
                   ))}
                   {item.tools.length > 3 && (
-                    <span className="px-2 py-1 rounded-md bg-[#1E2230] text-gray-400 text-xs font-medium">
+                    <span className="px-2 py-1 rounded-lg text-xs" style={{ backgroundColor: '#1A1A1A', color: '#6B6B6B' }}>
                       +{item.tools.length - 3}
                     </span>
                   )}
                 </div>
-                <div className="text-[#FD853A] text-xs font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                  View Detail &rarr;
-                </div>
+                <span className="text-xs font-semibold transition-transform duration-200 group-hover:translate-x-1" style={{ color: '#E8703A' }}>
+                  View →
+                </span>
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Lightbox / Full Detail Modal */}
+      {/* Lightbox Modal */}
       {activeModalItem && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-xl animate-fadeIn"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 animate-fadeIn"
+          style={{ backgroundColor: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(20px)' }}
           onClick={closeModal}
         >
-          {/* Main Modal Window */}
           <div
-            className="relative w-full max-w-6xl max-h-[92vh] bg-[#141722] border border-[#2C3145] rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row text-white animate-scaleUp"
+            className="relative w-full max-w-6xl max-h-[92vh] rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row text-white animate-scaleUp"
+            style={{ backgroundColor: '#141414', border: '1px solid #2C2C2C' }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
+            {/* Close */}
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-black/60 hover:bg-[#FD853A] text-white flex items-center justify-center border border-white/20 transition-all duration-300"
+              className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full flex items-center justify-center border transition-all duration-300 hover:scale-105"
+              style={{ backgroundColor: 'rgba(0,0,0,0.6)', borderColor: 'rgba(255,255,255,0.1)' }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#E8703A')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.6)')}
             >
-              <X size={20} />
+              <X size={18} color="white" />
             </button>
 
-            {/* Left Prev Nav */}
+            {/* Prev */}
             <button
               onClick={prevModalItem}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 rounded-full bg-black/60 hover:bg-[#FD853A] text-white flex items-center justify-center border border-white/20 transition-all duration-300 hidden sm:flex"
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-40 w-11 h-11 rounded-full flex items-center justify-center border transition-all duration-200 hidden sm:flex hover:scale-105"
+              style={{ backgroundColor: 'rgba(0,0,0,0.6)', borderColor: 'rgba(255,255,255,0.1)' }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#E8703A')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.6)')}
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={22} color="white" />
             </button>
 
-            {/* Right Next Nav */}
+            {/* Next */}
             <button
               onClick={nextModalItem}
-              className="absolute right-16 lg:right-[380px] top-1/2 -translate-y-1/2 z-40 w-12 h-12 rounded-full bg-black/60 hover:bg-[#FD853A] text-white flex items-center justify-center border border-white/20 transition-all duration-300 hidden sm:flex"
+              className="absolute right-16 lg:right-[380px] top-1/2 -translate-y-1/2 z-40 w-11 h-11 rounded-full flex items-center justify-center border transition-all duration-200 hidden sm:flex hover:scale-105"
+              style={{ backgroundColor: 'rgba(0,0,0,0.6)', borderColor: 'rgba(255,255,255,0.1)' }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#E8703A')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.6)')}
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={22} color="white" />
             </button>
 
-            {/* Image Preview Container */}
-            <div className="relative flex-1 bg-[#08090D] min-h-[300px] lg:min-h-[600px] flex items-center justify-center p-4 overflow-auto">
+            {/* Image */}
+            <div className="relative flex-1 min-h-[300px] lg:min-h-[600px] flex items-center justify-center p-4 overflow-auto"
+              style={{ backgroundColor: '#0A0A0A' }}>
               <div className="relative w-full h-full min-h-[350px] lg:min-h-[550px] flex items-center justify-center">
                 <Image
                   src={activeModalItem.image}
@@ -222,53 +262,61 @@ export default function DesignShowcase() {
               </div>
             </div>
 
-            {/* Info Sidebar Panel */}
-            <div className="w-full lg:w-[360px] xl:w-[400px] p-6 sm:p-8 bg-[#181C2B] border-t lg:border-t-0 lg:border-l border-[#2B3046] flex flex-col justify-between overflow-y-auto max-h-[50vh] lg:max-h-[92vh]">
+            {/* Sidebar */}
+            <div
+              className="w-full lg:w-[360px] xl:w-[400px] p-6 sm:p-8 flex flex-col justify-between overflow-y-auto max-h-[50vh] lg:max-h-[92vh]"
+              style={{ backgroundColor: '#1A1A1A', borderLeft: '1px solid #2C2C2C' }}
+            >
               <div>
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="px-3 py-1 rounded-full bg-[#FD853A]/20 text-[#FD853A] border border-[#FD853A]/40 text-xs font-bold uppercase tracking-wider">
+                <div className="flex items-center gap-2 mb-4">
+                  <span
+                    className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider"
+                    style={{ backgroundColor: 'rgba(232,112,58,0.15)', color: '#E8703A', border: '1px solid rgba(232,112,58,0.3)' }}
+                  >
                     {activeModalItem.category}
                   </span>
-                  <span className="text-gray-400 text-xs">
-                    {activeModalItem.tag}
-                  </span>
+                  <span className="text-xs" style={{ color: '#6B6B6B' }}>{activeModalItem.tag}</span>
                 </div>
 
-                <h3 className="text-2xl font-bold text-white mb-4 leading-tight">
+                <h3
+                  className="text-2xl font-bold mb-4 leading-tight"
+                  style={{ color: '#FAFAF7', fontFamily: "'Playfair Display', serif" }}
+                >
                   {activeModalItem.title}
                 </h3>
 
-                <p className="text-gray-300 text-sm leading-relaxed mb-6">
+                <p className="text-sm leading-relaxed mb-6" style={{ color: '#6B6B6B', fontFamily: "'Inter', sans-serif" }}>
                   {activeModalItem.description}
                 </p>
 
-                {/* Key Highlights */}
+                {/* Highlights */}
                 <div className="mb-6">
-                  <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                    <Layers size={14} className="text-[#FD853A]" />
-                    <span>Design Highlights</span>
+                  <h4 className="text-xs font-bold uppercase tracking-wider mb-3 flex items-center gap-1.5" style={{ color: '#6B6B6B' }}>
+                    <Layers size={13} style={{ color: '#E8703A' }} />
+                    Design Highlights
                   </h4>
                   <ul className="space-y-2">
                     {activeModalItem.highlights.map((h, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5 text-xs text-gray-200">
-                        <CheckCircle2 size={15} className="text-[#FD853A] shrink-0 mt-0.5" />
-                        <span>{h}</span>
+                      <li key={idx} className="flex items-start gap-2.5 text-xs" style={{ color: '#D6D3CC' }}>
+                        <CheckCircle2 size={14} style={{ color: '#E8703A', flexShrink: 0, marginTop: 1 }} />
+                        {h}
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                {/* Software & Tools Used */}
+                {/* Tools */}
                 <div className="mb-6">
-                  <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                    <Wrench size={14} className="text-[#FD853A]" />
-                    <span>Tools & Tech Used</span>
+                  <h4 className="text-xs font-bold uppercase tracking-wider mb-3 flex items-center gap-1.5" style={{ color: '#6B6B6B' }}>
+                    <Wrench size={13} style={{ color: '#E8703A' }} />
+                    Tools & Tech Used
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {activeModalItem.tools.map((t, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1 rounded-lg bg-[#23283D] border border-[#353C5A] text-xs font-semibold text-gray-200"
+                        className="px-3 py-1 rounded-lg text-xs font-semibold"
+                        style={{ backgroundColor: '#2C2C2C', color: '#D6D3CC', border: '1px solid #3A3A3A' }}
                       >
                         {t}
                       </span>
@@ -277,19 +325,21 @@ export default function DesignShowcase() {
                 </div>
               </div>
 
-              {/* Footer Modal Action */}
-              <div className="pt-6 border-t border-[#2C3146] flex items-center justify-between">
-                <span className="text-xs text-gray-400">
-                  {activeItemIndex + 1} of {designShowcaseData.length} Designs
+              <div className="pt-5 flex items-center justify-between" style={{ borderTop: '1px solid #2C2C2C' }}>
+                <span className="text-xs" style={{ color: '#6B6B6B' }}>
+                  {activeItemIndex + 1} of {designShowcaseData.length}
                 </span>
                 <a
                   href={activeModalItem.image}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-xl bg-[#FD853A] hover:bg-[#e4732c] text-white font-semibold text-xs flex items-center gap-1.5 transition-colors"
+                  className="px-4 py-2 rounded-xl text-white font-semibold text-xs flex items-center gap-1.5 transition-colors"
+                  style={{ backgroundColor: '#E8703A' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#D4602C')}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#E8703A')}
                 >
-                  <span>Open HD File</span>
-                  <Maximize2 size={14} />
+                  Open HD
+                  <Maximize2 size={13} />
                 </a>
               </div>
             </div>

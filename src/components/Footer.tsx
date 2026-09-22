@@ -1,36 +1,30 @@
 "use client";
 import React, { useState } from "react";
-import { Github, Linkedin, YoutubeIcon, InstagramIcon, TwitterIcon } from "lucide-react";
-import { ArrowUpRight } from "lucide-react";
-import CustomeText from "./ui/CustomeText";
+import { Github, Linkedin, YoutubeIcon, InstagramIcon, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
 const Footer = () => {
     const navigation = [
-        { label: "Home", href: "#home" },
-        { label: "About", href: "#about" },
+        { label: "Home",     href: "#home" },
+        { label: "About",    href: "#about" },
         { label: "Services", href: "#services" },
-        { label: "Tools", href: "#tools" },
-        { label: "Experience", href: "#experience" },
-        { label: "Designs", href: "#designs" },
-        { label: "Contact", href: "#contact" },
+        { label: "Designs",  href: "#designs" },
+        { label: "Contact",  href: "#contact" },
     ];
 
-    const iconsAndUrl = [
-        { icon: Github, url: "https://github.com/yashrk2006" },
-        { icon: Linkedin, url: "https://linkedin.com/in/yash-raj-722669327" },
-        { icon: TwitterIcon, url: "https://twitter.com/yash_raj" },
-        { icon: YoutubeIcon, url: "https://youtube.com/@yash_raj" },
-        { icon: InstagramIcon, url: "https://instagram.com/yash_raj" },
+    const socialLinks = [
+        { icon: Github,       url: "https://github.com/yashrk2006",                   label: "GitHub" },
+        { icon: Linkedin,     url: "https://linkedin.com/in/yash-raj-722669327",       label: "LinkedIn" },
+        { icon: YoutubeIcon,  url: "https://youtube.com/@yash_raj",                   label: "YouTube" },
+        { icon: InstagramIcon,url: "https://instagram.com/yash_raj",                  label: "Instagram" },
     ];
 
-    const contact = [
-        { text: "+91 7974185707", href: "tel:+917974185707" },
+    const contactItems = [
+        { text: "+91 7974185707",         href: "tel:+917974185707" },
         { text: "kushwahayashraj1@gmail.com", href: "mailto:kushwahayashraj1@gmail.com" },
-        { text: "Delhi, India", href: "#contact" },
+        { text: "Delhi, India",           href: "#contact" },
         { text: "LinkedIn: yash-raj-722669327", href: "https://linkedin.com/in/yash-raj-722669327" },
-        { text: "GitHub: yashrk2006", href: "https://github.com/yashrk2006" },
-        { text: "Portfolio: zorvia02-portfolio.vercel.app", href: "https://zorvia02-portfolio.vercel.app/" }
+        { text: "GitHub: yashrk2006",     href: "https://github.com/yashrk2006" },
     ];
 
     const [newsletterEmail, setNewsletterEmail] = useState("");
@@ -45,52 +39,67 @@ const Footer = () => {
         }
     };
 
-    const handleHireMe = () => {
-        const contactSection = document.getElementById("contact");
-        if (contactSection) {
-            contactSection.scrollIntoView({ behavior: "smooth" });
-        } else {
-            window.location.href = "mailto:kushwahayashraj1@gmail.com";
-        }
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     return (
-        <footer className="w-full min-h-[400px] lg:h-[685px] px-4 sm:px-6 lg:px-[71px] py-[30px] sm:py-[35px] lg:py-[40px] flex flex-col bg-[#272727] rounded-t-2xl sm:rounded-t-3xl text-white justify-between" suppressHydrationWarning>
-
-            {/* Top Section */}
-            <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-6">
-                <h1 className="font-semibold leading-tight text-[32px] sm:text-[40px] lg:text-[48px] xl:text-[64px] text-[#FCFCFD] text-center lg:text-left">
-                    Let&apos;s Connect There
-                </h1>
+        <footer
+            className="w-full px-4 sm:px-8 lg:px-[72px] py-16 lg:py-20 flex flex-col text-white"
+            style={{ backgroundColor: '#0E0E0E', borderTop: '1px solid #1A1A1A' }}
+            suppressHydrationWarning
+        >
+            {/* Top: CTA + Hire Button */}
+            <div className="w-full flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 pb-12 border-b border-[#2C2C2C]">
+                <div>
+                    <p className="text-[#6B6B6B] text-sm font-medium uppercase tracking-widest mb-2">
+                        Ready to work together?
+                    </p>
+                    <h2
+                        className="text-[#FAFAF7] leading-tight"
+                        style={{
+                            fontFamily: "'Playfair Display', serif",
+                            fontSize: 'clamp(32px, 5vw, 56px)',
+                            fontWeight: 700,
+                        }}
+                    >
+                        Let&apos;s Create<br />
+                        <span style={{ color: '#E8703A' }}>Something Great</span>
+                    </h2>
+                </div>
                 <button
-                    onClick={handleHireMe}
-                    className="group flex items-center justify-center gap-2 w-full sm:w-[180px] lg:w-[202px] h-[50px] sm:h-[56px] lg:h-[62px] px-4 sm:px-5 py-2 sm:py-2.5 text-white text-base sm:text-lg font-semibold rounded-full bg-[#FD853A] cursor-pointer hover:bg-[#e46e24] transition-colors"
+                    onClick={scrollToTop}
+                    className="group flex items-center gap-2.5 px-8 py-4 rounded-full text-white font-semibold text-base transition-all duration-300 hover:gap-4 shrink-0"
+                    style={{ backgroundColor: '#E8703A' }}
+                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#D4602C')}
+                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#E8703A')}
                 >
                     Hire Me
-                    <ArrowUpRight
-                        size={24}
-                        className="sm:w-7 sm:h-7 lg:w-8 lg:h-8 transition-transform duration-300 group-hover:rotate-45"
-                    />
+                    <ArrowUpRight size={20} className="transition-transform duration-300 group-hover:rotate-45" />
                 </button>
             </div>
 
-            <div className="border border-[#475467] w-full mt-6 md:mt-0"></div>
+            {/* Mid: 4-column grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 py-12 border-b border-[#2C2C2C]">
 
-            {/* Navigation Links */}
-            <div className="flex flex-col lg:flex-row justify-between w-full max-w-[1298px] h-auto lg:h-[239px] gap-8 lg:gap-0 mt-8 md:mt-0">
-
-                <div className="w-full lg:w-[635px] h-full flex flex-col items-start justify-start gap-6 lg:gap-10">
-                    <div className="flex gap-3 sm:gap-4 items-center flex-shrink-0 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                        <div className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 bg-[#FD853A] rounded-full flex items-center justify-center mb-1">
-                            <svg width="20" height="20" className="sm:w-6 sm:h-6 lg:w-6 lg:h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <text x="4" y="18" fontSize="12" className="sm:text-sm lg:text-base" fontWeight="bold" fill="white">YK</text>
-                            </svg>
+                {/* Brand column */}
+                <div className="flex flex-col gap-5 lg:col-span-1 sm:col-span-2">
+                    <button onClick={scrollToTop} className="flex items-center gap-3 group w-fit">
+                        <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: '#E8703A' }}>
+                            <span className="text-white font-bold text-xs tracking-wider">YRK</span>
                         </div>
-                        <span className="font-bold text-base sm:text-lg tracking-wide cursor-pointer">YASH RAJ</span>
-                    </div>
-                    <p className="w-full h-auto lg:h-[61px] text-[16px] sm:text-[18px] lg:text-[20px] text-[#FCFCFD]">Passionate about crafting high-impact graphic designs, cinematic video editing, brand identities, and AI content that captivate audiences and elevate brands.</p>
-                    <div className="flex gap-2 sm:gap-2.5">
-                        {iconsAndUrl.map((item, idx) => {
+                        <span
+                            className="text-[#FAFAF7] font-semibold text-lg tracking-wider"
+                            style={{ fontFamily: "'Playfair Display', serif" }}
+                        >
+                            YASH RAJ
+                        </span>
+                    </button>
+                    <p className="text-[#6B6B6B] text-sm leading-relaxed max-w-xs">
+                        Passionate about crafting high-impact graphic designs, cinematic video edits, brand identities, and AI content that captivate audiences.
+                    </p>
+                    <div className="flex gap-2">
+                        {socialLinks.map((item, idx) => {
                             const Icon = item.icon;
                             return (
                                 <Link
@@ -98,36 +107,50 @@ const Footer = () => {
                                     href={item.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-full flex hover:scale-110 transition-transform bg-[#333333] hover:bg-[#444444] items-center justify-center"
+                                    aria-label={item.label}
+                                    className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
+                                    style={{ backgroundColor: '#1A1A1A', border: '1px solid #2C2C2C' }}
+                                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#E8703A')}
+                                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#1A1A1A')}
                                 >
-                                    <Icon size={16} className="sm:w-5 sm:h-5 lg:w-5 lg:h-5 text-[#FD853A]" />
+                                    <Icon size={15} color="#FAFAF7" />
                                 </Link>
                             );
                         })}
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-5 lg:gap-7">
-                    <CustomeText title="Navigation" className="text-[18px] sm:text-[19px] lg:text-[20px] font-semibold text-[#FD853A]" />
-                    <div className="flex flex-col gap-3 lg:gap-5">
+                {/* Navigation */}
+                <div className="flex flex-col gap-4">
+                    <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: '#E8703A' }}>
+                        Navigation
+                    </p>
+                    <div className="flex flex-col gap-3">
                         {navigation.map((item, idx) => (
-                            <Link href={item.href} key={idx} className="text-[#FCFCFD] text-[14px] sm:text-[15px] lg:text-[16px] cursor-pointer hover:text-[#FD853A] transition-colors">
+                            <Link
+                                key={idx}
+                                href={item.href}
+                                className="text-[#6B6B6B] text-sm transition-colors duration-200 hover:text-[#FAFAF7]"
+                            >
                                 {item.label}
                             </Link>
                         ))}
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-5 lg:gap-7">
-                    <CustomeText title="Contact" className="text-[18px] sm:text-[19px] lg:text-[20px] font-semibold text-[#FD853A]" />
-                    <div className="flex flex-col gap-3 lg:gap-5">
-                        {contact.map((item, idx) => (
+                {/* Contact */}
+                <div className="flex flex-col gap-4">
+                    <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: '#E8703A' }}>
+                        Contact
+                    </p>
+                    <div className="flex flex-col gap-3">
+                        {contactItems.map((item, idx) => (
                             <a
                                 key={idx}
                                 href={item.href}
                                 target={item.href.startsWith("http") ? "_blank" : undefined}
                                 rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                                className="text-[#FCFCFD] text-[14px] sm:text-[15px] lg:text-[16px] cursor-pointer hover:text-[#FD853A] transition-colors"
+                                className="text-[#6B6B6B] text-sm transition-colors duration-200 hover:text-[#FAFAF7]"
                             >
                                 {item.text}
                             </a>
@@ -135,37 +158,52 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-5 lg:gap-7 w-full lg:w-[304px] items-start">
-                    <CustomeText
-                        title="Get the latest information"
-                        className="text-[18px] sm:text-[19px] lg:text-[20px] font-semibold text-[#FD853A]"
-                    />
-                    <form onSubmit={handleSubscribe} className="relative w-full h-[45px] sm:h-[48px] lg:h-[51px]">
+                {/* Newsletter */}
+                <div className="flex flex-col gap-4">
+                    <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: '#E8703A' }}>
+                        Stay in Touch
+                    </p>
+                    <p className="text-[#6B6B6B] text-sm leading-relaxed">
+                        Get updates on new projects and creative work.
+                    </p>
+                    <form onSubmit={handleSubscribe} className="relative">
                         <input
                             type="email"
                             required
                             value={newsletterEmail}
                             onChange={(e) => setNewsletterEmail(e.target.value)}
-                            placeholder="Email Address"
-                            className="w-full h-full bg-white text-black text-[14px] sm:text-[15px] lg:text-[16px] px-3 sm:px-4 py-2 sm:py-3 pr-12 rounded-[8px] sm:rounded-[10px] border-none outline-none"
+                            placeholder="Email address"
+                            className="w-full h-12 bg-[#1A1A1A] text-[#FAFAF7] text-sm px-4 pr-14 rounded-xl border border-[#2C2C2C] outline-none placeholder:text-[#6B6B6B] focus:border-[#E8703A] transition-colors"
                         />
-                        <button type="submit" className="absolute top-0 right-0 h-full w-[45px] sm:w-[48px] lg:w-[51px] bg-[#FD853A] rounded-r-[8px] sm:rounded-r-[10px] flex items-center justify-center cursor-pointer hover:bg-[#e46e24] transition-colors">
-                            <svg width="20" height="21" className="sm:w-6 sm:h-6 lg:w-6 lg:h-6" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6.29602 3.48708C3.91012 2.38589 1.36183 4.66673 2.19279 7.15964L3.45424 10.9007C3.59136 11.3074 3.97267 11.5812 4.40182 11.5812H13C13.5523 11.5812 14 12.0289 14 12.5812C14 13.1335 13.5523 13.5812 13 13.5812H4.40182C3.97267 13.5812 3.59136 13.855 3.45424 14.2617L2.19281 18.0028C1.36183 20.4957 3.91012 22.7765 6.29603 21.6754L20.0983 15.3051C22.422 14.2326 22.422 10.9299 20.0983 9.85737L6.29602 3.48708Z" fill="#FCFCFD" />
-                            </svg>
+                        <button
+                            type="submit"
+                            className="absolute top-1 right-1 h-10 w-10 rounded-lg flex items-center justify-center transition-colors"
+                            style={{ backgroundColor: '#E8703A' }}
+                            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#D4602C')}
+                            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#E8703A')}
+                        >
+                            <ArrowUpRight size={16} color="white" />
                         </button>
                     </form>
                     {subscribed && (
-                        <p className="text-sm text-[#FD853A] font-semibold mt-1">Thank you for subscribing!</p>
+                        <p className="text-xs font-semibold" style={{ color: '#E8703A' }}>
+                            Thank you for subscribing!
+                        </p>
                     )}
                 </div>
             </div>
 
-            <div className="border border-[#475467] w-full mt-8 lg:mt-16"></div>
-
-            <div className="flex flex-col sm:flex-row w-full max-w-[1298px] h-auto lg:h-[26px] items-start justify-between gap-4 sm:gap-0 mt-6 md:mt-0">
-                <p className="w-full sm:w-[415px] h-auto lg:h-[26px] text-[16px] sm:text-[18px] lg:text-[20px] text-white text-center sm:text-left">Copyright© 2026 Yash Raj Kushwaha. All Rights Reserved.</p>
-                <Link href={"#"} className="w-full sm:w-fit h-auto lg:h-[26px] text-[16px] sm:text-[18px] lg:text-[20px] text-white text-center sm:text-right hover:text-[#FD853A] transition-colors">Privacy Policy</Link>
+            {/* Bottom: copyright */}
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8">
+                <p className="text-[#6B6B6B] text-sm text-center sm:text-left">
+                    © 2026 Yash Raj Kushwaha. All Rights Reserved.
+                </p>
+                <Link
+                    href="#"
+                    className="text-[#6B6B6B] text-sm transition-colors hover:text-[#FAFAF7]"
+                >
+                    Privacy Policy
+                </Link>
             </div>
         </footer>
     );
