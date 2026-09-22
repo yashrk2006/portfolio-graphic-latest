@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw local folders
+/new images/
+/portfolio images/
+/yash-Photoroom.png

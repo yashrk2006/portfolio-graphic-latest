@@ -9,6 +9,7 @@ const CustomeText: React.FC<CustomeTextProps> = ({ title, className  }) => {
   return (
     <div
       className={`leading-tight ${className}`}
+      suppressHydrationWarning
     >
       {title}
     </div>

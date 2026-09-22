@@ -7,7 +7,7 @@ export default function DualToggleButtons() {
   const [active, setActive] = useState<"portfolio" | "hire">("portfolio");
 
   return (
-    <div className="flex border-b-2 border-white bg-white/10 backdrop-blur-[5px] rounded-full gap-[10px] p-[10px] w-[367px] h-[82px] items-center justify-center">
+    <div className="flex border-b-2 border-white bg-black/20 backdrop-blur-md rounded-full gap-[10px] p-[10px] w-[367px] h-[82px] items-center justify-center shadow-lg">
       {/* Portfolio Button */}
       <button
         onMouseEnter={() => setActive("portfolio")}

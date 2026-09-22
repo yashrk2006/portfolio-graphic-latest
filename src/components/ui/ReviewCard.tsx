@@ -1,8 +1,13 @@
 'use client';
 import { Star } from 'lucide-react';
-import { Review } from '@/data/data';
+export interface ReviewProps {
+  name: string;
+  role: string;
+  rating: number;
+  text: string;
+}
 
-export default function ReviewCard({ name, role, rating, text }: Review) {
+export default function ReviewCard({ name, role, rating, text }: ReviewProps) {
   return (
     <div className="flex flex-col w-full h-auto min-h-[200px] sm:min-h-[220px] lg:min-h-[265px] items-start gap-3 sm:gap-3.5 lg:gap-4 p-4 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl lg:rounded-3xl bg-[#FFFFFF]/14 backdrop-blur-[14px] opacity-80 hover:opacity-100 transition-opacity duration-300">
       {/* Header with Avatar and Info */}

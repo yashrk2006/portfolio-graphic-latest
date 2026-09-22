@@ -1,10 +1,13 @@
 import Image from 'next/image';
 import React from 'react';
 import ArrowButton from './ArrowButton';
-import { Blog as BlogType } from '../../data/data'; 
 import ClientOnly from './ClientOnly';
-
-interface BlogProps extends BlogType {
+interface BlogProps {
+  image: string;
+  button: string;
+  name: string;
+  date: string;
+  title: string;
   priority?: boolean;
 }
 

@@ -1,4 +1,4 @@
-import { Star, Award, ShieldCheck, LucideIcon } from 'lucide-react';
+import { Image, Video, Sparkles, LucideIcon } from 'lucide-react';
 
 export interface Experience {
   company: string;
@@ -13,14 +13,6 @@ export interface IconAndText {
   name: string;
 }
 
-export interface Blog {
-  image: string;
-  button: string;
-  name: string;
-  date: string;
-  title: string;
-}
-
 export interface PortfolioItem {
   image: string;
   title: string;
@@ -28,11 +20,16 @@ export interface PortfolioItem {
   desc: string;
 }
 
-export interface Review {
-  name: string;
-  role: string;
-  rating: number;
-  text: string;
+export interface DesignItem {
+  id: string;
+  title: string;
+  category: 'Social Media' | 'Branding & Web' | 'AI & Tech' | 'Posters & Artwork' | 'Video & Editing';
+  image: string;
+  tag: string;
+  description: string;
+  tools: string[];
+  highlights: string[];
+  featured?: boolean;
 }
 
 export interface CardData {
@@ -40,150 +37,327 @@ export interface CardData {
   imageSrc: string;
 }
 
-
-
 export const experiences: Experience[] = [
   {
-    company: "Cognizant, Mumbai",
-    duration: "Sep 2016 - July 2020",
-    role: "Experience Designer",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lacus nunc, posuere in justo vulputate, bibendum sodales.",
+    company: "Zorvia Digital",
+    duration: "Ongoing",
+    role: "Founder / Creative & Digital Content",
+    desc: "Built and managed visual identity, digital content, and online branding using Canva, Photoshop, CapCut, and AI tools alongside SEO and content planning.",
     dotColor: "bg-[#FD853A]",
   },
   {
-    company: "Sugee Pvt limited, Mumbai",
-    duration: "Sep 2020 - July 2023",
-    role: "UI/UX Designer",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lacus nunc, posuere in justo vulputate, bibendum sodales.",
+    company: "Freelance / Personal Projects",
+    duration: "2025 - Present",
+    role: "Graphic Designer & Video Editor",
+    desc: "Created short-form YouTube Shorts & Reels (memes, anime edits, face-offs) with strong hooks, thumbnails, captions, sound FX, transitions, and AI visual concepts.",
     dotColor: "bg-[#1D2939]",
   },
   {
-    company: "Cinetstox, Mumbai",
-    duration: "Sep 2023",
-    role: "Lead UX Designer",
-    desc: "",
+    company: "Hackathon Projects",
+    duration: "2025 - Present",
+    role: "Creative / Technical Contributor",
+    desc: "Contributed to 40+ hackathons designing presentations, pitch decks, demos, and visual communication materials under tight deadlines.",
     dotColor: "bg-[#FD853A]",
   },
 ];
 
+export const photoEditingTools = [
+  "Canva",
+  "Adobe Photoshop",
+  "Thumbnails & Stories",
+  "Social Media Posts",
+  "Branding Assets",
+];
+
+export const videoEditingTools = [
+  "CapCut",
+  "Instagram Reels",
+  "YouTube Shorts",
+  "Captions & Hooks",
+  "Transitions & SFX",
+];
+
+export const aiTools = [
+  "AI Image/Video Tools",
+  "Prompt Writing",
+  "Visual Concepts",
+  "Creative Production",
+];
+
 export const buttons: string[] = [
-  "Landing Page",
-  "Product Design",
-  "Animation",
-  "Glassmorphism",
-  "Cards",
+  "All",
+  "Graphic Design",
+  "Video Editing",
+  "Branding",
+  "Social Media",
+  "AI Content",
 ];
 
 export const iconAndText: IconAndText[] = [
   {
-    icon: Star,
-    name: "4.9 Average Rating",
+    icon: Image,
+    name: "Photo & Graphic Editing",
   },
   {
-    icon: Award,
-    name: "25+ Winning Awards",
+    icon: Video,
+    name: "Video Editing & Motion FX",
   },
   {
-    icon: ShieldCheck,
-    name: "Certified Product Design",
+    icon: Sparkles,
+    name: "AI Media Creation",
   },
 ];
 
 export const skills: string[] = [
-  "JavaScript",
-  "TypeScript",
-  "Next.js",
-  "React",
-  "Node.js",
-  "Tailwind CSS",
-  "MongoDB",
-  "PostgreSQL",
-  "Express",
+  "CapCut",
+  "Canva",
+  "Adobe Photoshop",
+  "AI Image/Video Tools",
+  "Instagram Reels",
+  "YouTube Shorts",
+  "Thumbnails & Banners",
+  "Branding & Identity",
+  "Social Media Strategy",
+  "Marketing & SEO",
+  "Prompt Writing",
+  "Git/GitHub",
+  "Google Workspace",
 ];
 
-export const blogs: Blog[] = [
+export const designShowcaseData: DesignItem[] = [
   {
-    image: "/Rectangle 6.svg",
-    button: "Read More",
-    name: "Mahesh Pokale",
-    date: "10 Nov, 2024",
-    title: "Design Unraveled: Behind the Scenes of UI/UX Magic",
+    id: "design-1",
+    title: "Brand Showcase & Creative Direction 2026",
+    category: "Branding & Web",
+    image: "/portfolio-images/brand-showcase-hero.png",
+    tag: "Graphic, Video & AI Creator",
+    description: "Complete visual identity and portfolio showcase highlighting graphic design, video editing, branding, and AI content creation for modern brands.",
+    tools: ["Photoshop", "Illustrator", "Premiere Pro", "AI Art"],
+    highlights: [
+      "Visual storytelling & brand strategy",
+      "Multi-platform creative assets",
+      "Dynamic typography & layout design",
+      "High-impact social media identity"
+    ],
+    featured: true
   },
   {
-    image: "/Frame 60.svg",
-    button: "Explore",
-    name: "Sarah Johnson",
-    date: "12 Dec, 2024",
-    title: "Mastering Tailwind: Tips for Clean UI Development",
+    id: "design-2",
+    title: "Social Media Campaign & Ad Banner Suite",
+    category: "Social Media",
+    image: "/portfolio-images/fresh-ingredients.png",
+    tag: "Ad Creatives & Posts",
+    description: "High-converting social media creatives featuring coffee branding, travel post series, fitness posters, pizza ads, natural skincare, and festival banners.",
+    tools: ["Photoshop", "Canva Pro", "Figma", "Digital Painting"],
+    highlights: [
+      "Product photography retouching",
+      "Engaging promotional ad creatives",
+      "Seasonal event banners (Diwali, New Year)",
+      "Cohesive brand color harmonies"
+    ],
+    featured: true
   },
   {
-    image: "/Rectangle 6 (1).svg",
-    button: "Check Now",
-    name: "John Doe",
-    date: "1 Jan, 2025",
-    title: "Modern Web Development in 2025",
+    id: "design-3",
+    title: "Zorvia Digital - Web & AI Solution Showcase",
+    category: "Branding & Web",
+    image: "/portfolio-images/design-chatgpt-ai.png",
+    tag: "Corporate & AI Platform",
+    description: "Sleek dark-mode digital agency platform presentation featuring products like RiskShield Fintech, CivicMind AI Smart Cities, and LifeLens Assistant.",
+    tools: ["Figma", "Photoshop", "UI/UX Design", "AI Media"],
+    highlights: [
+      "Dark glassmorphism UI design",
+      "Fintech & Smart City concept layouts",
+      "Responsive visual hierarchy",
+      "High-converting SaaS landing page design"
+    ],
+    featured: true
   },
+  {
+    id: "design-4",
+    title: "AI Is Changing Everything - Future Tech Campaign",
+    category: "AI & Tech",
+    image: "/portfolio-images/design-1.png",
+    tag: "Future Tech Concept",
+    description: "Futuristic digital poster exploring AI automation, neural networks, and the future of technology and human potential.",
+    tools: ["Midjourney v6", "Photoshop", "Illustrator"],
+    highlights: [
+      "Neural network visual glow effects",
+      "Cyberpunk workspace ambiance",
+      "Conceptual typography & tagline placement",
+      "High-resolution 4K asset rendering"
+    ],
+    featured: true
+  },
+  {
+    id: "design-5",
+    title: "Final Boss: One Life - Dark Fantasy Game Art",
+    category: "Posters & Artwork",
+    image: "/portfolio-images/design-2.png",
+    tag: "Dark Fantasy Concept Art",
+    description: "Cinematic dark fantasy visual art depicting a hero confronting a monumental titan under an eclipsed sun with lava & waterfall landscapes.",
+    tools: ["Photoshop", "AI Generative Art", "Matte Painting", "Color Grading"],
+    highlights: [
+      "Apocalyptic lighting & depth",
+      "Complex environmental composition",
+      "Custom serif title typography",
+      "Intense drama & mood setting"
+    ],
+    featured: true
+  },
+  {
+    id: "design-6",
+    title: "Gojo vs Makima - Anime Showdown Poster",
+    category: "Posters & Artwork",
+    image: "/portfolio-images/design-3.png",
+    tag: "Anime Art & Compositing",
+    description: "Dynamic contrast poster pitting Satoru Gojo (Jujutsu Kaisen) against Makima (Chainsaw Man) with blue infinity energy vs red chain domain visual effects.",
+    tools: ["Photoshop", "Color Grading", "Custom Brush FX", "Kanji Typography"],
+    highlights: [
+      "Dual blue vs red color scheme",
+      "Authentic Japanese kanji integration",
+      "Custom glowing energy particles",
+      "High-contrast character compositing"
+    ],
+    featured: true
+  },
+  {
+    id: "design-7",
+    title: "Visual Identity & Modern Brand Creatives",
+    category: "Social Media",
+    image: "/portfolio-images/new-design-just.png",
+    tag: "Brand Creatives & Design",
+    description: "High-impact visual artwork, promo banners, and brand engagement concepts crafted with Canva & Photoshop.",
+    tools: ["Canva", "Photoshop", "Typography", "Branding"],
+    highlights: [
+      "Eye-catching layout composition",
+      "Color harmony & hierarchy",
+      "Social media optimization"
+    ],
+    featured: true
+  },
+  {
+    id: "design-8",
+    title: "Shorts & Reels Visual Hook Storyboard",
+    category: "Video & Editing",
+    image: "/portfolio-images/new-design-1.png",
+    tag: "CapCut & Motion FX",
+    description: "Engaging vertical video storytelling layout, captions, dynamic motion effects, and audio-reactive visual cuts.",
+    tools: ["CapCut", "Reels & Shorts", "Motion FX", "Sound FX"],
+    highlights: [
+      "High retention hook pacing",
+      "Animated captions & text overlays",
+      "Platform optimized vertical format"
+    ],
+    featured: true
+  },
+  {
+    id: "design-9",
+    title: "AI Assisted Creative Concept & Matte Painting",
+    category: "AI & Tech",
+    image: "/portfolio-images/new-design-2.png",
+    tag: "AI Art & Concept Production",
+    description: "Generative AI prompt engineering combined with Photoshop retouching for futuristic digital artwork.",
+    tools: ["Midjourney", "Photoshop", "Prompt Writing", "Color Grading"],
+    highlights: [
+      "Custom prompt iteration",
+      "Photorealistic rendering",
+      "Atmospheric lighting & depth"
+    ],
+    featured: true
+  },
+  {
+    id: "design-10",
+    title: "Promotional Poster & Event Creative Suite",
+    category: "Posters & Artwork",
+    image: "/portfolio-images/new-design-3.png",
+    tag: "Event & Campaign Creatives",
+    description: "Bold promotional poster design, event announcements, and marketing campaign visuals tailored for maximum click-through.",
+    tools: ["Photoshop", "Canva Pro", "Graphic Design"],
+    highlights: [
+      "High contrast typography",
+      "Targeted audience call-to-action",
+      "Multi-resolution asset export"
+    ],
+    featured: true
+  },
+  {
+    id: "design-11",
+    title: "Digital Brand Banner & Thumbnails Pack",
+    category: "Social Media",
+    image: "/portfolio-images/new-design-4.png",
+    tag: "YouTube Thumbnails & Banners",
+    description: "Click-worthy YouTube thumbnails and social media banners designed to boost CTR and brand recognition.",
+    tools: ["Canva", "Photoshop", "Thumbnail Design"],
+    highlights: [
+      "Optimized focal point & expression",
+      "Vibrant background contrasts",
+      "High CTR layout hierarchy"
+    ],
+    featured: true
+  }
 ];
 
 export const portfolioData: PortfolioItem[] = [
   {
-    image: "/Frame 26.svg",
-    title: "Lirante 1",
-    href: "/project-1",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue interdum ligula a dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis orci elementum egestas lobortis.",
+    image: "/portfolio-images/brand-showcase-hero.png",
+    title: "Brand Visual Identity 2026",
+    href: "#design-showcase",
+    desc: "Complete visual story & brand creative suite featuring graphic design, video editing, and AI media production.",
   },
   {
-    image: "/Frame 26.svg",
-    title: "Lirante 2",
-    href: "/project-2",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue interdum ligula a dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis orci elementum egestas lobortis.",
+    image: "/portfolio-images/fresh-ingredients.png",
+    title: "Social Media Ad Suite",
+    href: "#design-showcase",
+    desc: "High-impact social media creatives, ad banners, and campaign designs across coffee, skincare, travel, & food brands.",
   },
   {
-    image: "/Frame 26.svg",
-    title: "Lirante 3",
-    href: "/project-3",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue interdum ligula a dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis orci elementum egestas lobortis.",
+    image: "/portfolio-images/design-chatgpt-ai.png",
+    title: "Zorvia Digital AI Platform",
+    href: "#design-showcase",
+    desc: "Corporate dark-mode platform showcase and AI product suite including RiskShield, CivicMind AI, and LifeLens.",
   },
   {
-    image: "/Frame 26.svg",
-    title: "Lirante 4",
-    href: "/project-4",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue interdum ligula a dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis orci elementum egestas lobortis.",
+    image: "/portfolio-images/new-design-just.png",
+    title: "Modern Brand Creatives",
+    href: "#design-showcase",
+    desc: "High-impact promo banners and social media brand identity assets.",
+  },
+  {
+    image: "/portfolio-images/new-design-1.png",
+    title: "Shorts & Reels Hook Edits",
+    href: "#design-showcase",
+    desc: "CapCut vertical video editing, animated captions, and sound FX.",
+  },
+  {
+    image: "/portfolio-images/new-design-2.png",
+    title: "AI Concept Art Suite",
+    href: "#design-showcase",
+    desc: "Generative AI prompt design and digital matte painting compositing.",
+  },
+  {
+    image: "/portfolio-images/new-design-3.png",
+    title: "Event & Ad Campaign Creatives",
+    href: "#design-showcase",
+    desc: "Promotional poster design and marketing campaign visuals.",
+  },
+  {
+    image: "/portfolio-images/new-design-4.png",
+    title: "High CTR YouTube Thumbnails",
+    href: "#design-showcase",
+    desc: "Engaging thumbnails and channel banner graphics for creators.",
   },
 ];
 
-export const reviews: Review[] = [
-  {
-    name: "Mahesh Pokale",
-    role: "Web Designer",
-    rating: 5,
-    text: "Consectetur adipiscing elit. Sed congue interdum ligula a dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis orci elementum egestas lobortis.",
-  },
-  {
-    name: "Sarah Johnson",
-    role: "Product Manager",
-    rating: 4,
-    text: "Excellent work! Very professional and meets deadlines consistently. Highly recommended for design and development projects.",
-  },
-  {
-    name: "John Doe",
-    role: "UI/UX Lead",
-    rating: 5,
-    text: "Top quality design and coding. Strong attention to detail and highly collaborative throughout the project lifecycle.",
-  },
-  {
-    name: "Aryan Sharma",
-    role: "Software Engineer",
-    rating: 4,
-    text: "Innovative approach, clean design, and prompt delivery. Will work together again for sure!",
-  },
-];
+
 
 export const cardData: CardData[] = [
-  { title: "Jewellery Design", imageSrc: "/Rectangle 7.svg" },
-  { title: "Mehndi Expert", imageSrc: "/Rectangle 7.svg" },
-  { title: "Fashion Designer", imageSrc: "/Rectangle 7.svg" },
-  { title: "Craft Expert", imageSrc: "/Rectangle 7.svg" },
-  { title: "Beauty & Imitation", imageSrc: "/Rectangle 7.svg" },
-  { title: "Designer Studio", imageSrc: "/Rectangle 7.svg" },
+  { title: "Graphic Design & Thumbnails", imageSrc: "/Rectangle 7.svg" },
+  { title: "CapCut Reels & Shorts Editing", imageSrc: "/Rectangle 7.svg" },
+  { title: "AI Content & Visual Concepts", imageSrc: "/Rectangle 7.svg" },
+  { title: "Social Media & Brand Identity", imageSrc: "/Rectangle 7.svg" },
+  { title: "Marketing, SEO & Content", imageSrc: "/Rectangle 7.svg" },
+  { title: "Pitch Decks & Creative Demos", imageSrc: "/Rectangle 7.svg" },
 ];
+
+
